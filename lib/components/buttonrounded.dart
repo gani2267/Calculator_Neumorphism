@@ -1,4 +1,5 @@
 import 'package:calculator/components/neucontainer.dart';
+import 'package:calculator/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 Widget ButtonRounded(
@@ -9,9 +10,14 @@ Widget ButtonRounded(
       Color? textColor,
       required bool darkMode}) {
 
+  padding = Dimensions.height17;
+
   return GestureDetector(
     child: Padding(
-      padding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.symmetric(
+        vertical: 6,
+        horizontal: 6
+      ),
       child: NeuContainer(
 
         darkMode: darkMode,
@@ -30,12 +36,12 @@ Widget ButtonRounded(
                         : darkMode
                         ? Colors.white
                         : Colors.black,
-                    fontSize: 30),
+                    fontSize: Dimensions.font30),
               )
                   : Icon(
                 icon,
                 color: iconColor,
-                size: 30,
+                size: Dimensions.icon30,
               )),
         ),
       ),

@@ -2,7 +2,10 @@ import 'package:calculator/components/buttonoval.dart';
 import 'package:calculator/components/buttonrounded.dart';
 import 'package:calculator/components/swithmode.dart';
 import 'package:flutter/material.dart';
+import 'package:calculator/utils/dimensions.dart';
 import 'package:math_expressions/math_expressions.dart';
+
+import 'package:get/get.dart';
 
 class CalculatorNeuScreen extends StatefulWidget {
   @override
@@ -23,7 +26,10 @@ class _CalculatorNeuScreenState extends State<CalculatorNeuScreen> {
       backgroundColor: darkmode ? colorDark : colorLight,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(18),
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.padding_w_18,
+            vertical: Dimensions.padding_h_18
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -40,16 +46,22 @@ class _CalculatorNeuScreenState extends State<CalculatorNeuScreen> {
                       child: SwitchMode(darkmode),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: Dimensions.sizedbox_70,
                     ),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        str,
-                        style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                            color: darkmode ? Colors.white : Colors.red),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        reverse: true,
+                        child: Text(
+                          str,
+                          softWrap: false,
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: Dimensions.font35,
+                              fontWeight: FontWeight.bold,
+                              color: darkmode ? Colors.white : Colors.red),
+                        ),
                       ),
                     ),
                     Row(
@@ -58,19 +70,19 @@ class _CalculatorNeuScreenState extends State<CalculatorNeuScreen> {
                         Text(
                           '=',
                           style: TextStyle(
-                              fontSize: 35,
+                              fontSize: Dimensions.font35,
                               color: darkmode ? Colors.green : Colors.grey),
                         ),
                         Text(
                           answer,
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: Dimensions.font20,
                               color: darkmode ? Colors.green : Colors.grey),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height: Dimensions.sizedbox_5,
                     )
                   ],
                 ),
@@ -381,5 +393,14 @@ class _CalculatorNeuScreenState extends State<CalculatorNeuScreen> {
     ContextModel cm = ContextModel();
     double eval = exp.evaluate(EvaluationType.REAL, cm);
     answer = eval.toString();
+
+    print("width");
+    print(Get.width);
+
+    print("height");
+    print(Get.height);
+    print("HeightFactor");
+    print(Dimensions.heightFactor);
+
   }
 }
